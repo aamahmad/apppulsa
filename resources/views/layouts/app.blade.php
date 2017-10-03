@@ -62,8 +62,8 @@
       </div>
     </nav>
 
-    
-        @yield('content')
+      @include('layouts._flash')
+      @yield('content')
    
     <!-- Scripts -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>

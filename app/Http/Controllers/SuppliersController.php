@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Supplier;
+use Session;
 
 class SuppliersController extends Controller
 {
@@ -21,7 +22,7 @@ class SuppliersController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-        $suppliers = Supplier::where('name', 'LIKE', '%'.$q.'%')->paginate(10);
+        $suppliers = Supplier::where('name', 'LIKE', '%'.$q.'%')->paginate(20);
         return view('suppliers.index', compact('suppliers', 'q'));
     }
 
@@ -32,7 +33,7 @@ class SuppliersController extends Controller
      */
     public function create()
     {
-        //
+        return view('suppliers.create');
     }
 
     /**
@@ -43,7 +44,21 @@ class SuppliersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'no_telp' => 'required',
+            'alamat' => 'required',
+            'email' => 'required'
+        ]);
+
+        $supplier = Supplier::create($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $supplier->name , berhasil ditambahkan."
+        ]);
+
+        return redirect()->route('suppliers.index');
     }
 
     /**
@@ -54,7 +69,7 @@ class SuppliersController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -65,7 +80,8 @@ class SuppliersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $supplier = Supplier::findOrFail($id);
+        return view('suppliers.edit', compact('supplier'));
     }
 
     /**
@@ -77,7 +93,22 @@ class SuppliersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $suppliers = Supplier::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required',
+            'no_telp' => 'required',
+            'alamat' => 'required',
+            'email' => 'required'
+        ]);
+
+        $suppliers->update($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $request->name , berhasil diubah."
+        ]);
+
+        return redirect()->route('suppliers.index');
     }
 
     /**
@@ -88,6 +119,16 @@ class SuppliersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Supplier::find($id)->delete();
+
+        if(!Supplier::destroy($id)) return redirect()->back();
+
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Sales/Ditributir telah dihapus."
+        ]);
+
+        return redirect()->route('suppliers.index');
     }
 }

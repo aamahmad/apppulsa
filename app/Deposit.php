@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Deposit extends Model
 {
-    protected $fillable = ['id_supplier','jumlah','tgl_beli'];
+    protected $fillable = ['supplier_id','category_id','jumlah','tgl_beli'];
 
     // Relasi One To Many #relasi1
     public function supplier()

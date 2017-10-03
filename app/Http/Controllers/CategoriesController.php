@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Category;
+use Session;
 
 class CategoriesController extends Controller
 {
@@ -21,7 +22,7 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-        $categories = Category::where('name', 'LIKE', '%'.$q.'%')->paginate(5);
+        $categories = Category::where('name', 'LIKE', '%'.$q.'%')->paginate(20);
         return view('categories.index', compact('categories', 'q'));
     }
 
@@ -32,7 +33,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -43,7 +44,19 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'induk_id' => 'required'
+        ]);
+
+        $category = Category::create($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $category->name , berhasil ditambahkan."
+        ]);
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -65,7 +78,8 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -77,7 +91,20 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required',
+            'induk_id' => 'required'
+        ]);
+
+        $category->update($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $request->name , berhasil diubah."
+        ]);
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -88,6 +115,14 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Category::find($id)->delete();
+        if(!Category::destroy($id)) return redirect()->back();
+
+        Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Category telah dihapus."
+        ]);
+
+        return redirect()->route('categories.index');
     }
 }

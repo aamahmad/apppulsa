@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
 
 class Category extends Model
 {
@@ -51,6 +52,33 @@ class Category extends Model
     public function deposits()
     {
         return $this->hasMany('App\Deposits');
+    }
+
+    // penghapusan categori, even deleting
+    public static function boot()
+    {
+      parent::boot();
+
+      self::deleting(function($category) {
+        // mengecek apakah customer masih punya data transaksi penjualan
+        if($category->products->count() > 0) {
+          // menyimpan pesan error
+          $html = 'Kategori tidak bisa dihapus karena ada data di produk : ';
+          $html .= '<ul>';
+          foreach ($category->products as $product) {
+            $html .= "<li>$product->name</li>";
+          }
+          $html .= '</ul>';
+
+          Session::flash("flash_notification", [
+            'level' => 'info',
+            'message'=>$html
+          ]);
+
+          // membatalka proses penghapusan
+          return false;
+        }
+      });
     }
 
     

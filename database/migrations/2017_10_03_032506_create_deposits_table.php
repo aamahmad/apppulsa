@@ -21,7 +21,7 @@ class CreateDepositsTable extends Migration
             $table->date('tgl_beli');
             $table->timestamps();
 
-            $table->foreign('supplier_id')->references('id')->on('suppliers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('supplier_id')->references('id')->on('suppliers');
             $table->foreign('category_id')->references('id')->on('categories');
         });
     }

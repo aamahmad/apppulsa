@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Customer;
 use App\Downline;
+use Session;
 
 class CustomersController extends Controller
 {
@@ -22,7 +23,7 @@ class CustomersController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-        $customers = Customer::where('name', 'LIKE', '%'.$q.'%')->paginate(5);
+        $customers = Customer::where('name', 'LIKE', '%'.$q.'%')->paginate(20);
         return view('customers.index', compact('customers', 'q'));
     }
 
@@ -33,7 +34,7 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        //
+        return view('customers.create');
     }
 
     /**
@@ -44,7 +45,19 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'no_hp' => 'required'
+        ]);
+
+        $customer = Customer::create($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $customer->name , berhasil ditambahkan."
+        ]);
+
+        return redirect()->route('customers.index');
     }
 
     /**
@@ -66,7 +79,8 @@ class CustomersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+        return view('customers.edit', compact('customer'));
     }
 
     /**
@@ -78,7 +92,20 @@ class CustomersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required',
+            'no_hp' => 'required'
+        ]);
+
+        $customer->update($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $request->name , berhasil diubah."
+        ]);
+
+        return redirect()->route('customers.index');
     }
 
     /**
@@ -89,6 +116,13 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(!Customer::destroy($id)) return redirect()->back();
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Pelanggan telah dihapus."
+        ]);
+
+        return redirect()->route('customers.index');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Deposit;
+use Session;
 
 class DepositsController extends Controller
 {
@@ -32,7 +33,7 @@ class DepositsController extends Controller
      */
     public function create()
     {
-        //
+        return view('deposits.create');
     }
 
     /**
@@ -43,7 +44,21 @@ class DepositsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'supplier_id' => 'required|exists:suppliers,id',
+            'category_id' => 'required|exists:categories,id',
+            'jumlah' => 'required|numeric',
+            'tgl_beli' => 'required'
+        ]);
+
+        $deposit = Deposit::create($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $deposit->jumlah , berhasil ditambahkan."
+        ]);
+
+        return redirect()->route('deposits.index');
     }
 
     /**
@@ -65,7 +80,8 @@ class DepositsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+        return view('customers.edit', compact('customer'));
     }
 
     /**
@@ -77,7 +93,20 @@ class DepositsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required',
+            'no_hp' => 'required'
+        ]);
+
+        $customer->update($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $request->name , berhasil diubah."
+        ]);
+
+        return redirect()->route('customers.index');
     }
 
     /**
@@ -88,6 +117,14 @@ class DepositsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Deposit::find($id)->delete();
+        //if(!Supplier::destroy($id)) return redirect()->back();
+
+        Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Deposit telah dihapus."
+        ]);
+
+        return redirect()->route('deposits.index');
     }
 }

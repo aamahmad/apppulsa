@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Stock;
+use Session;
 
 class StocksController extends Controller
 {
@@ -21,7 +22,7 @@ class StocksController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-        $stocks = Stock::where('jumlah', 'LIKE', '%'.$q.'%')->paginate(5);
+        $stocks = Stock::where('jumlah', 'LIKE', '%'.$q.'%')->paginate(20);
         return view('stocks.index', compact('stocks', 'q'));
     }
 
@@ -32,7 +33,7 @@ class StocksController extends Controller
      */
     public function create()
     {
-        //
+        return view('stocks.create');
     }
 
     /**
@@ -43,7 +44,21 @@ class StocksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'supplier_id' => 'required|exists:suppliers,id',
+            'product_id' => 'required|exists:products,id',
+            'jumlah' => 'required|numeric',
+            'tgl_beli' => 'required'
+        ]);
+
+        $stock = Stock::create($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $stock->jumlah , berhasil ditambahkan."
+        ]);
+
+        return redirect()->route('stocks.index');
     }
 
     /**
@@ -65,7 +80,8 @@ class StocksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+        return view('customers.edit', compact('customer'));
     }
 
     /**
@@ -77,7 +93,20 @@ class StocksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required',
+            'no_hp' => 'required'
+        ]);
+
+        $customer->update($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $request->name , berhasil diubah."
+        ]);
+
+        return redirect()->route('customers.index');
     }
 
     /**
@@ -88,6 +117,14 @@ class StocksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Stock::find($id)->delete();
+        //if(!Supplier::destroy($id)) return redirect()->back();
+
+        Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Stock telah dihapus."
+        ]);
+
+        return redirect()->route('stocks.index');
     }
 }
