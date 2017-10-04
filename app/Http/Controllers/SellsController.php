@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Sell;
+use session;
 
 class SellsController extends Controller
 {
@@ -21,7 +22,7 @@ class SellsController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-        $sells = Sell::where('harga_retail', 'LIKE', '%'.$q.'%')->paginate(5);
+        $sells = Sell::where('harga_awal', 'LIKE', '%'.$q.'%')->paginate(20);
         return view('sells.index', compact('sells', 'q'));
     }
 
@@ -32,7 +33,7 @@ class SellsController extends Controller
      */
     public function create()
     {
-        //
+        return view('sells.create');
     }
 
     /**
@@ -43,7 +44,22 @@ class SellsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:products,name',
+            'harga_dasar' => 'required|numeric',
+            'harga_jual' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
+            'satuan' => 'required'
+        ]);
+
+        $sell = Sell::create($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $sell->jumlah , berhasil ditambahkan."
+        ]);
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -65,7 +81,8 @@ class SellsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('products.edit', compact('customer'));
     }
 
     /**
@@ -77,7 +94,20 @@ class SellsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required',
+            'no_hp' => 'required'
+        ]);
+
+        $product->update($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $request->name , berhasil diubah."
+        ]);
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -88,6 +118,14 @@ class SellsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Product::find($id)->delete();
+        if(!Product::destroy($id)) return redirect()->back();
+
+        Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Produk telah dihapus."
+        ]);
+
+        return redirect()->route('products.index');
     }
 }

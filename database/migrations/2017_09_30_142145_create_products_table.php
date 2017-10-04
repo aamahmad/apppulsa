@@ -18,6 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('satuan');
             $table->integer('category_id')->unsigned();
+            $table->integer('harga_dasar');
+            $table->integer('harga_jual');
             $table->timestamps();
 
             //$table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
