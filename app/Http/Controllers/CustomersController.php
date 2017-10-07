@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Customer;
 use App\Downline;
+use App\Nomor;
+use App\Sell;
 use Session;
 
 class CustomersController extends Controller
@@ -68,7 +70,11 @@ class CustomersController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer = \App\Customer::findOrFail($id);
+        //$datanomor = \App\Nomor::findOrFail($id);
+        $datanomor = Nomor::where('customer_id', $customer->id)->get();
+        $trxpelanggans = Sell::where('customer_id', $customer->id)->get();
+        return view('customers.show', compact('customer','datanomor','trxpelanggans'));
     }
 
     /**

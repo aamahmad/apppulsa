@@ -54,7 +54,7 @@
             	@if ($i > 1) @endif
               	<tr>
 	                <td>{{ $i }}</td>
-	                <td>{{ $customer->name }}</td>
+	                <td><a href="{{ route('customers.show', $customer) }}">{{ $customer->name }}</a></td>
                   <td>{{ $customer->alamat}}</td>
                   <td>
                      @foreach(App\Nomor::where('customer_id',$customer->id)->get() as $nomorcustomer)

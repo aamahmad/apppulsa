@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Session;
 
 class Product extends Model
 {
-    protected $fillable = ['name','satuan','category_id','harga_dasar','harga_jual'];
+    protected $fillable = ['name','jenis','category_id','harga_dasar','harga_jual'];
 
     // relasi one to many #relasi3
     public function stocks()

@@ -13,7 +13,26 @@
 	{!! $errors->first('alamat', '<p class="help-block">:message</p>') !!}
  </div>
 </div>
-
+<!--
+<div class="form-group">
+  {!! Form::label('alamat', 'Data 1', ['class'=>'col-md-2 control-label']) !!}
+  <div class="col-md-3">
+    {!! Form::text('data1', old('data1'), ['class'=>'form-control', 'placeholder'=>'No. Hp / PLN / Dll']) !!}
+  </div>
+  <div class="col-md-3">
+    {!! Form::text('option1', old('option1'), ['class'=>'form-control', 'placeholder'=>'Keterangan']) !!}
+  </div>
+</div>
+<div class="form-group">
+  {!! Form::label('alamat', 'Data 2', ['class'=>'col-md-2 control-label']) !!}
+  <div class="col-md-3">
+    {!! Form::text('option1', old('option1'), ['class'=>'form-control', 'placeholder'=>'No. Hp / PLN / Dll']) !!}
+  </div>
+  <div class="col-md-3">
+    {!! Form::text('option1', old('option1'), ['class'=>'form-control', 'placeholder'=>'Keterangan']) !!}
+  </div>
+</div>
+-->
 <div class="form-group">
   <div class="col-md-4 col-md-offset-2">
     {!! Form::submit('Simpan', ['class'=>'btn btn-primary']) !!}

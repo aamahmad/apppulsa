@@ -49,7 +49,7 @@ class ProductsController extends Controller
             'harga_dasar' => 'required|numeric',
             'harga_jual' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
-            'satuan' => 'required'
+            'jenis' => 'required'
         ]);
 
         $product = Product::create($request->all());
@@ -82,7 +82,7 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        return view('products.edit', compact('customer'));
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -96,8 +96,11 @@ class ProductsController extends Controller
     {
         $product = Product::findOrFail($id);
         $this->validate($request, [
-            'name' => 'required',
-            'no_hp' => 'required'
+            'name' => 'required|unique:products,name,'. $id,
+            'harga_dasar' => 'required|numeric',
+            'harga_jual' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
+            'jenis' => 'required'
         ]);
 
         $product->update($request->all());
