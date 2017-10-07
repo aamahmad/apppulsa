@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
-<div class="container">
+
 
  	<ul class="nav nav-tabs" role="tablist">
     	<li role="presentation" ><a href="{{ route('sells.index') }}">Data Trx Penjualan</a></li>
@@ -14,7 +14,7 @@
 		@include('sells._form')
 	{!! Form::close() !!}
 
-</div>
+
 @endsection
 
 @section('script')

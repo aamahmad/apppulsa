@@ -1,7 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
-<div class="container">
 
  	<ul class="nav nav-tabs" role="tablist">
     	<li role="presentation" ><a href="{{ route('customers.index') }}">Data Pelanggan</a></li>
@@ -13,5 +12,5 @@
 		@include('customers._form', ['model' => $customer])
 	{!! Form::close() !!}
 
-</div>
+
 @endsection

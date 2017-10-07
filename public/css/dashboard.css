@@ -5,6 +5,7 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
+  font-size: 12px;
 }
 
 
@@ -102,4 +103,28 @@ body {
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
+}
+
+/*
+ * TAmbahan
+ */
+
+
+.sisi.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 3px 15px;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1px;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 2px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
 }

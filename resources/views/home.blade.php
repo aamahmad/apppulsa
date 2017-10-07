@@ -1,7 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
-<div class="container">
 
     <div class="row">
         @foreach(App\Category::noInduk()->get() as $category)
@@ -15,5 +14,5 @@
 
     </div>
            
-</div>
+
 @endsection

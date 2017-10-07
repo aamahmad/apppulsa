@@ -1,7 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
-<div class="container">
   <div class="row">
  	  <div class="col-md-12">
       <ul class="nav nav-tabs" role="tablist">
@@ -84,6 +83,6 @@
       </div>
 
   </div>
-</div>
+
 
 @endsection

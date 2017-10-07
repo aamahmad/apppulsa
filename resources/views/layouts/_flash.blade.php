@@ -1,6 +1,5 @@
-<div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
 
 			@if (session()->has('flash_notification.message'))
 			<div class="alert alert-{{ session()->get('flash_notification.level') }}">
@@ -11,4 +10,3 @@
 
 		</div>
 	</div>
-</div>

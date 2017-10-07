@@ -1,7 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
-<div class="container">
 
  	<ul class="nav nav-tabs" role="tablist">
     	<li role="presentation" ><a href="{{ route('stocks.index') }}">Data Stock</a></li>
@@ -14,5 +13,5 @@
 		@include('stocks._form')
 	{!! Form::close() !!}
 
-</div>
+
 @endsection

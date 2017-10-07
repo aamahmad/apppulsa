@@ -1,7 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
- <div class="container">
     <div class="row">
       	<div class="col-md-12">
 		 	<ul class="nav nav-tabs" role="tablist">
@@ -43,7 +42,7 @@
 				          	</button>
 				        </a>
 				        <p></p>
-		              	<table class="table">
+		              	<table class="table table-striped">
 		              		<tr>
 		              			<td><b>No.</b></td>
 		              			<td><b>Data Nomor</b></td>
@@ -106,7 +105,7 @@
 		   
 		</div>
 	</div>
-</div>
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">

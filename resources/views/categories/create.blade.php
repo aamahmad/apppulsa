@@ -1,7 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
-<div class="container">
 
  	<ul class="nav nav-tabs" role="tablist">
     	<li role="presentation" ><a href="{{ route('categories.index') }}">Kategori</a></li>
@@ -13,5 +12,5 @@
 		@include('categories._form')
 	{!! Form::close() !!}
 
-</div>
+
 @endsection
