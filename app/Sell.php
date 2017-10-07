@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sell extends Model
 {
-    protected $fillable = ['customer_id','product_id','qty','harga_barang','sub_total'];
+    protected $fillable = ['customer_id','product_id','harga_retail','harga_awal','qty','harga_barang','tgl','sub_total'];
 
     // relasi One To Many Relasi6 (has many through #Relasi12)
     public function product()

@@ -1,29 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
+<span>Product Category: </span>
+    <select style="width: 200px" class="productcategory" id="prod_cat_id">
 
- 	<ul class="nav nav-tabs" role="tablist">
-    	<li role="presentation" ><a href="{{ route('sells.index') }}">Data Trx Penjualan</a></li>
-    	<li role="presentation" class="active"><a href="#">Form Transaksi Penjualan Baru</a></li>
-  	</ul>
-  	<p>
-  	<p>
+        <option value="0" disabled="true" selected="true">-Select-</option>
+        @foreach($prod as $cat)
+            <option value="{{$cat->id}}">{{$cat->name}}</option>
+        @endforeach
 
-	{!! Form::open(['route' => 'sells.store', 'class'=>'form-horizontal']) !!}
-		@include('sells._form')
-	{!! Form::close() !!}
+    </select>
 
-</div>
+    <span>Product Name: </span>
+    <select style="width: 200px" class="productname">
+
+        <option value="0" disabled="true" selected="true">Product Name</option>
+    </select>
+
+    <span>Product Price: </span>
+    <input type="text" class="harga_dasar">
+    <input type="text" class="harga_jual">
+</div>  
 @endsection
 
 @section('script')
 
-
 <script type="text/javascript">
     $(document).ready(function(){
 
-       	$(document).on('change','.productcategory',function(){
+        $(document).on('change','.productcategory',function(){
             // console.log("hmm its change");
 
             var cat_id=$(this).val();
@@ -34,7 +41,7 @@
 
             $.ajax({
                 type:'get',
-                url:'{!!URL::to('findProduct')!!}',
+                url:'{!!URL::to('findProductName')!!}',
                 data:{'id':cat_id},
                 success:function(data){
                     //console.log('success');
@@ -64,7 +71,7 @@
             var op="";
             $.ajax({
                 type:'get',
-                url:'{!!URL::to('findHarga')!!}',
+                url:'{!!URL::to('findPrice')!!}',
                 data:{'id':product_id},
                 dataType:'json',//return data will be json
                 success:function(data){
@@ -81,38 +88,10 @@
 
                 }
             });
+
+
         });
 
-
-
-		$(function(){
-			window.prettyPrint && prettyPrint();
-			$('#dp1').datepicker({
-				format: 'yyyy-mm-dd'
-			});
-		});
-
-
-        ////
-        //$(function () {
-            $('.harga_jual,.qty').on('change', function () {
-                var harga_jual = $(this).hasClass('harga_jual') ? $(this).val() : $(this).siblings('.harga_jual').val();
-                var qty = $(this).hasClass('qty') ? $(this).val() : $(this).siblings('.qty').val();
-                harga_jual = harga_jual || 0;
-                qty = qty || 0;
-                var val = harga_jual >= 1 && qty >= 1 ? parseFloat(harga_jual * qty) : 0;
-                $(this).siblings('.amount').val(val);
-                var total = 0;
-                var update = false;
-                $('.amount').each(function () {
-                    val = parseFloat($(this).val()) | 0;
-                    total = val ? (parseFloat(total + val)) : total;
-                });
-                $('.result').val(total);
-            });
-        //});
-
-        
     });
 </script>
 

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Sell;
-use session;
+use App\Category;
+use App\Product;
+use Session;
 
 class SellsController extends Controller
 {
@@ -33,7 +35,9 @@ class SellsController extends Controller
      */
     public function create()
     {
-        return view('sells.create');
+        $prod=Category::all();//get data from table
+        //return view('sells.create');
+        return view('sells.create',compact('prod'));//sent data to view
     }
 
     /**
@@ -45,21 +49,23 @@ class SellsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:products,name',
-            'harga_dasar' => 'required|numeric',
-            'harga_jual' => 'required|numeric',
-            'category_id' => 'required|exists:categories,id',
-            'satuan' => 'required'
+            'customer_id' => 'required',
+            'product_id' => 'required',
+            'harga_awal' => 'required|numeric',
+            'harga_retail' => 'required|numeric',
+            'qty' => 'required',
+            'tgl' => 'required',
+            'sub_total' => 'required'
         ]);
 
         $sell = Sell::create($request->all());
 
         Session::flash("flash_notification", [
             "level"=>"success",
-            "message"=>" $sell->jumlah , berhasil ditambahkan."
+            "message"=>" $sell->tgl , berhasil ditambahkan."
         ]);
 
-        return redirect()->route('products.index');
+        return redirect()->route('sells.index');
     }
 
     /**
@@ -118,14 +124,34 @@ class SellsController extends Controller
      */
     public function destroy($id)
     {
-        //Product::find($id)->delete();
-        if(!Product::destroy($id)) return redirect()->back();
+        Sell::find($id)->delete();
+        //if(!Sell::destroy($id)) return redirect()->back();
 
         Session::flash("flash_notification", [
             "level"=>"danger",
-            "message"=>"Produk telah dihapus."
+            "message"=>"Data Transaksi Penjualan telah dihapus."
         ]);
 
-        return redirect()->route('products.index');
+        return redirect()->route('sells.index');
+    }
+
+
+    public function findProduct(Request $request){
+
+        //if our chosen id and products table prod_cat_id col match the get first 100 data 
+
+        //$request->id here is the id of our chosen option id
+        //$data=Product::where('category_id',$request->id)->take(100)->get();
+        $data=Product::select('name','id')->where('category_id',$request->id)->get();
+        return response()->json($data);//then sent this data to ajax success
+    }
+
+    public function findHarga(Request $request){
+
+        //it will get price if its id match with product id
+        $p=Product::where('id',$request->id)->first();
+        //$p = Product::where('category_id', $request->id)->first();
+
+        return response()->json($p);
     }
 }

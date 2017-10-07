@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Session;
 
 class Customer extends Model
 {
-    protected $fillable = ['name','no_hp'];
+    protected $fillable = ['name','alamat'];
 
     // Relasi One to Many Relasi7
     public function sells()

@@ -42,7 +42,8 @@
               	<tr>
                 	<th>#</th>
                 	<th>Nama</th>
-                  <th>No Hp</th>
+                  <th>Alamat</th>
+                  <th>Data Nomor</th>
 	                <th>Jenis</th>
 	                <th></th>
               	</tr>
@@ -54,7 +55,12 @@
               	<tr>
 	                <td>{{ $i }}</td>
 	                <td>{{ $customer->name }}</td>
-                  <td>{{ $customer->no_hp}}</td>
+                  <td>{{ $customer->alamat}}</td>
+                  <td>
+                     @foreach(App\Nomor::where('customer_id',$customer->id)->get() as $nomorcustomer)
+                      {{ $nomorcustomer->nomor }} , 
+                     @endforeach
+                  </td>
                   <td><span class="label label-default">pelanggan</span>
                   @if (isset($customer->downline->markup))
                   <span class="label label-info">Downline</span>

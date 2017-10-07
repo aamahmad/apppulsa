@@ -13,6 +13,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/datepicker.css') }}" rel="stylesheet">
+    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     
 </head>
 <body class="bg">
@@ -31,7 +34,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           @if(Auth::check())
           <ul class="nav navbar-nav">
-            <li {{ setActive('home') }}><a href="{{ url('home') }}">Home</a></li>
+            <li {{ setActive('home') }}><a href="{{ url('home') }}">Dashboard</a></li>
             <li {{ setActive('customers') }}><a href="{{ url('customers') }}">Pelanggan</a></li>
             <li {{ setActive('suppliers') }}><a href="{{ url('suppliers') }}">Sales</a></li>
             <li {{ setActive('deposits') }}><a href="{{ url('deposits') }}">Deposit</a></li>
@@ -67,7 +70,9 @@
    
     <!-- Scripts -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('script')
 </body>
 </html>

@@ -47,7 +47,7 @@ class CustomersController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'no_hp' => 'required'
+            'alamat' => 'required'
         ]);
 
         $customer = Customer::create($request->all());

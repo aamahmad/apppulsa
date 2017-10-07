@@ -27,3 +27,9 @@ Route::resource('stocks', 'StocksController');
 Route::resource('categories', 'CategoriesController');
 Route::resource('products', 'ProductsController');
 Route::resource('sells', 'SellsController');
+
+// sells
+Route::get('/findProduct','SellsController@findProduct');
+Route::get('/findHarga','SellsController@findHarga');
+
+
