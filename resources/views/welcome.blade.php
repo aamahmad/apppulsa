@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
@@ -20,7 +20,7 @@
             }
             .bg {
                 /* The image used */
-                background-image: url("http://localhost:8000/img/education.jpg");
+                background-image: url("http://localhost:8000/img/toko.jpg");
 
                 /* Full height */
                 height: 100%; 
@@ -30,6 +30,15 @@
                 background-repeat: no-repeat;
                 background-size: cover;
             }
+
+            .jumbotron {
+                padding-top: 30px;
+                padding-bottom: 30px;
+                margin-bottom: 30px;
+                color: inherit;
+                background-color: #fffefe;
+                border: 4px dashed #505152;
+            }
         </style>
     </head>
 <body class="bg">
@@ -38,7 +47,7 @@
             <div class='col-md-8'></div>
             <div class='col-md-4'>
                 <div class="jumbotron">
-                <p class="text-center"><b>App</b><font color="red">Pulsa</font></p>
+                <p class="text-center">{{ config('app.name', 'Laravel') }}</font></p>
                 <p class="font-weight-bold">Login</p>
 
                 {!! Form::open(['url'=>'login', 'class'=>'form-horizontal']) !!}

@@ -55,6 +55,8 @@
           @if(Auth::check())
           <ul class="nav nav-sidebar sisi">
             <li {{ setActive('home') }} ><a href="{{ url('home') }}">Dashboard</a></li>
+          </ul>
+          <ul class="nav nav-sidebar sisi">
             <li {{ setActive('sells') }}><a href="{{ url('sells') }}">Penjualan</a></li>
             <li {{ setActive('deposits') }}><a href="{{ url('deposits') }}">Deposit</a></li>
             <li {{ setActive('stocks') }}><a href="{{ url('stocks') }}">Stock</a></li>

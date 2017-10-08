@@ -7,7 +7,7 @@
     <div class='col-md-8'></div>
     <div class='col-md-4'>
         
-        <p class="text-center"><b>App</b><font color="red">Pulsa</font></p>
+        <p class="text-center">{{ config('app.name', 'Laravel') }}</font></p>
         <p class="font-weight-bold">Login</p>
 
         {!! Form::open(['url'=>'login', 'class'=>'form-horizontal']) !!}

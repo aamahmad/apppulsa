@@ -44,7 +44,7 @@
               	<tr>
                 	<th>#</th>
                 	<th>Nama</th>
-                  <th>Satuan</th>
+                  <th>Jenis</th>
                   <th>Kategori</th>
                   <th>Harga Dasar</th>
                   <th>Harga Jual</th>
@@ -58,7 +58,7 @@
               	<tr>
 	                <td>{{ $i }}</td>
                   <td>{{ $product->name}}</td>
-                  <td>{{ $product->satuan }}</td>
+                  <td>{{ $product->jenis }}</td>
                   <td>{{ $product->category->name or '' }}</td>
                   <td>{{ $product->harga_dasar}}</td>
 	                <td>{{ $product->harga_jual}}</td>
