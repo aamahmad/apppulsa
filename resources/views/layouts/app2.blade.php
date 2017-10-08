@@ -19,7 +19,6 @@
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
 
-   
   </head>
 
   <body>
@@ -63,6 +62,7 @@
           </ul>
           <ul class="nav nav-sidebar sisi">
             <li {{ setActive('customers') }}><a href="{{ url('customers') }}">Pelanggan</a></li>
+            <li {{ setActive('downlines') }}><a href="{{ url('downlines') }}">Downline</a></li>
             <li {{ setActive('suppliers') }}><a href="{{ url('suppliers') }}">Sales</a></li>
             <li {{ setActive('categories') }}><a href="{{ url('categories') }}">Category</a></li>
             <li {{ setActive('products') }}><a href="{{ url('products') }}">Produk</a></li>
@@ -73,7 +73,6 @@
 
         @include('layouts._flash')
         @yield('content')
-
 
         </div>
       </div>

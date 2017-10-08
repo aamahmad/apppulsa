@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Downline;
+use Session;
 
 class DownlinesController extends Controller
 {
@@ -33,7 +34,7 @@ class DownlinesController extends Controller
      */
     public function create()
     {
-        //
+        return view('downlines.create');
     }
 
     /**
@@ -44,7 +45,20 @@ class DownlinesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'customer_id' => 'required',
+            'nomor' => 'required',
+            'markup' => 'required'
+        ]);
+
+        $downline = Downline::create($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $customer->name , berhasil ditambahkan."
+        ]);
+
+        return redirect()->route('downlines.index');
     }
 
     /**
@@ -66,7 +80,8 @@ class DownlinesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $downline = Downline::findOrFail($id);
+        return view('downlines.edit', compact('downline'));
     }
 
     /**
@@ -78,7 +93,21 @@ class DownlinesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $downline = Downline::findOrFail($id);
+        $this->validate($request, [
+            'customer_id' => 'required',
+            'nomor' => 'required',
+            'markup' => 'required'
+        ]);
+
+        $downline->update($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>" $request->nomor , berhasil diubah."
+        ]);
+
+        return redirect()->route('downlines.index');
     }
 
     /**
@@ -89,6 +118,14 @@ class DownlinesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Downline::find($id)->delete();
+        //if(!Category::destroy($id)) return redirect()->back();
+
+        Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Downline telah dihapus."
+        ]);
+
+        return redirect()->route('downlines.index');
     }
 }

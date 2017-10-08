@@ -15,7 +15,7 @@ class CreateSellsTable extends Migration
     {
         Schema::create('sells', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('customer_id')->unsigned();
+            $table->integer('customer_id')->nullable();
             $table->integer('product_id')->unsigned();
             $table->integer('qty');
             $table->integer('harga_awal');
@@ -24,7 +24,6 @@ class CreateSellsTable extends Migration
             $table->date('tgl');
             $table->timestamps();
 
-            $table->foreign('customer_id')->references('id')->on('customers');
             $table->foreign('product_id')->references('id')->on('products');
         });
     }

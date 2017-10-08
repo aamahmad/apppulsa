@@ -49,7 +49,7 @@ class SellsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'customer_id' => 'required',
+            'customer_id',
             'product_id' => 'required',
             'harga_awal' => 'required|numeric',
             'harga_retail' => 'required|numeric',
@@ -87,8 +87,9 @@ class SellsController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        return view('products.edit', compact('customer'));
+        $sell = Sell::findOrFail($id);
+        $prod=Category::where('induk_id','!=',0)->get();//get data from table
+        return view('sells.edit', compact('sell','prod'));
     }
 
     /**
@@ -100,20 +101,25 @@ class SellsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
+        $sell = Sell::findOrFail($id);
         $this->validate($request, [
-            'name' => 'required',
-            'no_hp' => 'required'
+            'customer_id',
+            'product_id' => 'required',
+            'harga_awal' => 'required|numeric',
+            'harga_retail' => 'required|numeric',
+            'qty' => 'required',
+            'tgl' => 'required',
+            'sub_total' => 'required'
         ]);
 
-        $product->update($request->all());
+        $sell->update($request->all());
 
         Session::flash("flash_notification", [
             "level"=>"success",
-            "message"=>" $request->name , berhasil diubah."
+            "message"=>" $request->tgl , berhasil diubah."
         ]);
 
-        return redirect()->route('products.index');
+        return redirect()->route('sells.index');
     }
 
     /**

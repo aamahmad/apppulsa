@@ -45,6 +45,7 @@
             <thead>
                 <tr>
                   <th>#</th>
+                  <th>Tanggal</th>
                   <th>Nama Barang</th>
                   <th>Kategori</th>
                   <th>Modal</th>
@@ -62,6 +63,7 @@
               @if ($i > 1) @endif
                 <tr>
                   <td>{{ $i }}</td>
+                  <td>{{ date('d M Y', strtotime($sell->tgl)) }}</td>
                   <td>{{ $sell->product->name or ''}}</td>
                   <td>{{ $sell->product->category->name or ''}}</td>
                   <td> Rp {{ number_format($sell->harga_awal) }}</td>
@@ -74,7 +76,7 @@
 
                   <td>
                   {!! Form::model($sell, ['route' => ['sells.destroy', $sell], 'method' => 'delete', 'class' => 'form-inline js-confirm', 'data-confirm'=> 'Yakin mau di hapus ..!!'] ) !!}
-                    <a href="{{ route('sells.edit', $sell->id)}}"><button type="button" class="btn btn-xs btn-link">Edit</button></a> &nbsp;| &nbsp;
+                    
                       {!! Form::submit('delete', ['class'=>'btn btn-xs btn-danger js-submit-confirm']) !!}
                   {!! Form::close()!!}
                   </td>

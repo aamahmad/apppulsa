@@ -85,8 +85,8 @@ class StocksController extends Controller
      */
     public function edit($id)
     {
-        $customer = Customer::findOrFail($id);
-        return view('customers.edit', compact('customer'));
+        $stock = Stock::findOrFail($id);
+        return view('stocks.edit', compact('stock'));
     }
 
     /**
@@ -98,20 +98,22 @@ class StocksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $customer = Customer::findOrFail($id);
+        $stock = Stock::findOrFail($id);
         $this->validate($request, [
-            'name' => 'required',
-            'no_hp' => 'required'
+            'supplier_id' => 'required|exists:suppliers,id',
+            'product_id' => 'required|exists:products,id',
+            'jumlah' => 'required|numeric',
+            'tgl_beli' => 'required'
         ]);
 
-        $customer->update($request->all());
+        $stock->update($request->all());
 
         Session::flash("flash_notification", [
             "level"=>"success",
             "message"=>" $request->name , berhasil diubah."
         ]);
 
-        return redirect()->route('customers.index');
+        return redirect()->route('stocks.index');
     }
 
     /**

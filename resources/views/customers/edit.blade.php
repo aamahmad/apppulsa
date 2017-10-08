@@ -8,7 +8,7 @@
   	</ul>
   	<p></p>
 
-	{!! Form::model($customer, ['route' => ['customers.update', $customer], 'method' => 'patch']) !!}
+	{!! Form::model($customer, ['route' => ['customers.update', $customer], 'method' => 'patch','class'=>'form-horizontal']) !!}
 		@include('customers._form', ['model' => $customer])
 	{!! Form::close() !!}
 

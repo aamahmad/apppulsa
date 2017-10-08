@@ -80,8 +80,8 @@ class DepositsController extends Controller
      */
     public function edit($id)
     {
-        $customer = Customer::findOrFail($id);
-        return view('customers.edit', compact('customer'));
+        $deposit = Deposit::findOrFail($id);
+        return view('deposits.edit', compact('deposit'));
     }
 
     /**

@@ -9,7 +9,7 @@ class Customer extends Model
 {
     protected $fillable = ['name','alamat'];
 
-    // Relasi One to Many Relasi7
+    // Relasi One to Many Relasi7 
     public function sells()
     {
     	return $this->hasMany('App\Sell');
@@ -47,4 +47,5 @@ class Customer extends Model
         }
       });
     }
+
 }

@@ -3,13 +3,13 @@
 @section('content')
 
  	<ul class="nav nav-tabs" role="tablist">
-    	<li role="presentation" ><a href="{{ route('customers.index') }}">Data Pelanggan</a></li>
-    	<li role="presentation" class="active"><a href="#">Form Ubah Pelanggan</a></li>
+    	<li role="presentation" ><a href="{{ route('deposits.index') }}">Data Deposit</a></li>
+    	<li role="presentation" class="active"><a href="#">Form Ubah Deposit</a></li>
   	</ul>
   	<p></p>
 
-	{!! Form::model($customer, ['route' => ['customers.update', $customer], 'method' => 'patch']) !!}
-		@include('customers._form', ['model' => $customer])
+	{!! Form::model($deposit, ['route' => ['deposits.update', $deposit], 'method' => 'patch']) !!}
+		@include('deposits._form', ['model' => $deposit])
 	{!! Form::close() !!}
 
 

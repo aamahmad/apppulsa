@@ -16,6 +16,7 @@ class CreateDownlinesTable extends Migration
         Schema::create('downlines', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('markup');
+            $table->string('nomor');
             $table->integer('customer_id')->unsigned();
             $table->timestamps();
 

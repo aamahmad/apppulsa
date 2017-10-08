@@ -82,16 +82,24 @@
 			        <table class="table">
 		              		<tr>
 		              			<td><b>No.</b></td>
+		              			<td><b>Tanggal</b></td>
 		              			<td><b>Jenis Produk</b></td>
-		              			<td><b>Jenis Produk</b></td>
+		              			<td><b>Nama Produk</b></td>
+		              			<td><b>Harga Jual</b></td>
+		              			<td><b>Qty</b></td>
+		              			<td><b>Sub Total</b></td>
 		              		</tr>
 			        <?php $i = 1; ?>
 			            	@foreach($trxpelanggans as $trxpelanggan)
 			            	@if ($i > 1) @endif
 			              		<tr>
 			              			<td>{{ $i }}</td>
-			              			<td>{{ $trxpelanggan->jenis}}</td>
-			              			<td>{{ $trxpelanggan->customer_id}}</td>
+			              			<td>{{ date('d M Y', strtotime($trxpelanggan->tgl)) }}</td>
+			              			<td>{{ $jenisproduk = App\Product::find($trxpelanggan->product_id)->jenis }}</td>
+			              			<td>{{ $jenisproduk = App\Product::find($trxpelanggan->product_id)->name }}</td>
+			              			<td>Rp {{ number_format($trxpelanggan->harga_retail) }}</td>
+			              			<td>{{ $trxpelanggan->qty}}</td>
+			              			<td>Rp {{ number_format( $trxpelanggan->sub_total) }}</td>
 			              		</tr>
 		              		<?php $i++; ?>
               				@endforeach
