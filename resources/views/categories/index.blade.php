@@ -30,7 +30,7 @@
             <h3 class="panel-title">Kategori Produk : <b>{{ $category->name }}</b></h3>
           </div>
         <div class="list-group">
-          <table class="table table-bordered">
+          <table class="table table-striped">
               <thead>
                   <tr>
                     <th>#</th>

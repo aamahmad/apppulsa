@@ -36,7 +36,7 @@
       </div>
 
       <div class="col-md-12">
-        <table class="table table-bordered">
+        <table class="table table-striped">
             <thead>
               	<tr>
                 	<th>#</th>
@@ -57,7 +57,7 @@
                   <td>{{ $customer->alamat}}</td>
                   <td>
                      @foreach(App\Nomor::where('customer_id',$customer->id)->get() as $nomorcustomer)
-                      {{ $nomorcustomer->nomor }} , 
+                      <span class="label label-success"><b>{{ $nomorcustomer->nomor }} | {{ $nomorcustomer->keterangan }}</b></span>
                      @endforeach
                   </td>
                   <td><span class="label label-default">pelanggan</span>

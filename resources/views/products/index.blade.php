@@ -39,7 +39,7 @@
       </div>
 
       <div class="col-md-12">
-        <table class="table table-bordered">
+        <table class="table table-striped">
             <thead>
               	<tr>
                 	<th>#</th>
