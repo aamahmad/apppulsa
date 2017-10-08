@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Stock;
+use App\Category; 
 use Session;
 
 class StocksController extends Controller
@@ -33,7 +34,11 @@ class StocksController extends Controller
      */
     public function create()
     {
-        return view('stocks.create');
+        $prod=Category::where('induk_id', '!=',0)
+              ->where('induk_id','!=', 1)
+              ->get();//get data from table
+
+        return view('stocks.create',compact('prod'));//sent data to view
     }
 
     /**

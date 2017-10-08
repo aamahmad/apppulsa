@@ -35,7 +35,7 @@ class SellsController extends Controller
      */
     public function create()
     {
-        $prod=Category::all();//get data from table
+        $prod=Category::where('induk_id','!=',0)->get();//get data from table
         //return view('sells.create');
         return view('sells.create',compact('prod'));//sent data to view
     }

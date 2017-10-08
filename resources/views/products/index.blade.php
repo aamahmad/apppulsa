@@ -48,6 +48,7 @@
                   <th>Kategori</th>
                   <th>Harga Dasar</th>
                   <th>Harga Jual</th>
+                  <th>Margin/keuntungan</th>
 	                <th></th>
               	</tr>
             </thead>
@@ -60,8 +61,9 @@
                   <td>{{ $product->name}}</td>
                   <td>{{ $product->jenis }}</td>
                   <td>{{ $product->category->name or '' }}</td>
-                  <td>{{ $product->harga_dasar}}</td>
-	                <td>{{ $product->harga_jual}}</td>
+                  <td>Rp {{ number_format($harga1 = $product->harga_dasar)}}</td>
+                  <td>Rp {{ number_format($harga2 = $product->harga_jual)}}</td>
+	                <td>Rp {{ number_format($harga2 - $harga1 ) }}</td>
 	                <td>
 	                {!! Form::model($product, ['route' => ['products.destroy', $product], 'method' => 'delete', 'class' => 'form-inline js-confirm', 'data-confirm'=> 'Yakin mau di hapus ..!!'] ) !!}
                  		<a href="{{ route('products.edit', $product->id)}}"><button type="button" class="btn btn-xs btn-link">Edit</button></a> &nbsp;| &nbsp;

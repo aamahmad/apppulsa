@@ -58,7 +58,7 @@
 	                <td>{{ $i }}</td>
                   <td>{{ $deposit->supplier->name or ''}}</td>
                   <td>{{ $deposit->category->name or ''}}</td>
-                  <td>{{ $deposit->jumlah }}</td>
+                  <td>Rp {{ number_format($deposit->jumlah) }}</td>
 	                <td>{{ $deposit->tgl_beli }}</td>
 	                <td>
 	                {!! Form::model($deposit, ['route' => ['deposits.destroy', $deposit], 'method' => 'delete', 'class' => 'form-inline js-confirm', 'data-confirm'=> 'Yakin mau di hapus ..!!'] ) !!}
