@@ -106,20 +106,14 @@ class SellsController extends Controller
     {
         $sell = Sell::findOrFail($id);
         $this->validate($request, [
-            'customer_id',
-            'product_id' => 'required',
-            'harga_awal' => 'required|numeric',
-            'harga_retail' => 'required|numeric',
-            'qty' => 'required',
-            'tgl' => 'required',
-            'sub_total' => 'required'
+            'isLunas'
         ]);
 
         $sell->update($request->all());
 
         Session::flash("flash_notification", [
             "level"=>"success",
-            "message"=>" $request->tgl , berhasil diubah."
+            "message"=>"Status Trx denga ID : $sell->id , berhasil diubah."
         ]);
 
         return redirect()->route('sells.index');
