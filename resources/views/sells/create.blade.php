@@ -93,7 +93,7 @@
 
 
         ////
-        //$(function () {
+        $(function () {
             $('.harga_jual,.qty').on('change', function () {
                 var harga_jual = $(this).hasClass('harga_jual') ? $(this).val() : $(this).siblings('.harga_jual').val();
                 var qty = $(this).hasClass('qty') ? $(this).val() : $(this).siblings('.qty').val();
@@ -109,7 +109,7 @@
                 });
                 $('.result').val(total);
             });
-        //});
+        });
 
         
     });

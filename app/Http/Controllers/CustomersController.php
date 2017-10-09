@@ -103,7 +103,7 @@ class CustomersController extends Controller
         $customer = Customer::findOrFail($id);
         $this->validate($request, [
             'name' => 'required',
-            'no_hp' => 'required'
+            'alamat' => 'required'
         ]);
 
         $customer->update($request->all());

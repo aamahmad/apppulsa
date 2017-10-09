@@ -53,6 +53,7 @@
                   <th>Qty</th>
                   <th>Sub. Total</th>
                   <th>Margin</th>
+                  <th>Status</th>
                   <th>Pelanggan</th>
                   <th></th>
                 </tr>
@@ -71,6 +72,13 @@
                   <td>{{ $sell->qty}}</td>
                   <td>Rp {{ number_format($subtotal = $sell->harga_retail *= $sell->qty) }}  </td>
                   <td>Rp {{ number_format($subtotal - ($sell->harga_awal *= $sell->qty)) }}  </td>
+                  <td>
+                    @if (isset($sell->isLunas))
+                      <span class="label label-success">Lunas</span>
+                    @else
+                      <span class="label label-danger">Belum Bayar</span>
+                    @endif
+                  </td>
                   <td>{{ $sell->customer->name or ''}}</td>
                   
 

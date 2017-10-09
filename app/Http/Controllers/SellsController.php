@@ -55,7 +55,10 @@ class SellsController extends Controller
             'harga_retail' => 'required|numeric',
             'qty' => 'required',
             'tgl' => 'required',
-            'sub_total' => 'required'
+            'sub_total' => 'required',
+            'isLunas',
+            'ket1',
+            'ket2'
         ]);
 
         $sell = Sell::create($request->all());
