@@ -55,7 +55,7 @@ class DownlinesController extends Controller
 
         Session::flash("flash_notification", [
             "level"=>"success",
-            "message"=>" $customer->name , berhasil ditambahkan."
+            "message"=>" $downline->nomor , berhasil ditambahkan."
         ]);
 
         return redirect()->route('downlines.index');
