@@ -8,6 +8,7 @@ use App\Sell;
 use App\Category;
 use App\Product;
 use Session;
+use Carbon;
 
 class SellsController extends Controller
 {
@@ -193,6 +194,13 @@ class SellsController extends Controller
     {
         $q = $request->get('q');
         $sells = Sell::where('isLunas', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20);
+        return view('sells.index', compact('sells', 'q'));
+    }
+
+    public function laba()
+    {
+        $q = Carbon\Carbon::now()->format('Y-m-d');
+        $sells = Sell::where('tgl', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20);
         return view('sells.index', compact('sells', 'q'));
     }
 }

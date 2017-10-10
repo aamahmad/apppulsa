@@ -33,5 +33,6 @@ Route::resource('nomors', 'NomorsController');
 Route::get('/findProduct','SellsController@findProduct');
 Route::get('/findHarga','SellsController@findHarga');
 Route::get('/status', 'SellsController@status');
+Route::get('/laba', 'SellsController@laba');
 
 

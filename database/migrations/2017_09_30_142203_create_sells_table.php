@@ -25,6 +25,7 @@ class CreateSellsTable extends Migration
             $table->string('ket1')->nullable();
             $table->string('ket2')->nullable();
             $table->date('tgl');
+            $table->integer('laba')->nullable();;
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products');
