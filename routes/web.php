@@ -32,5 +32,6 @@ Route::resource('nomors', 'NomorsController');
 // sells
 Route::get('/findProduct','SellsController@findProduct');
 Route::get('/findHarga','SellsController@findHarga');
+Route::get('/status', 'SellsController@status');
 
 

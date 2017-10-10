@@ -24,7 +24,7 @@ class SellsController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-        $sells = Sell::where('harga_awal', 'LIKE', '%'.$q.'%')->paginate(20);
+        $sells = Sell::where('harga_awal', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20);
         return view('sells.index', compact('sells', 'q'));
     }
 
@@ -61,6 +61,36 @@ class SellsController extends Controller
             'ket2'
         ]);
 
+        $quantity = $request->get('qty');
+        $modalproduk = $quantity *= $request->get('harga_awal');
+        $subtotal = $request->get('sub_total');
+        $keuntungan = $subtotal -= $modalproduk;
+
+            $sell = Sell::firstOrCreate([
+                'customer_id' => $request->get('customer_id'),
+                'product_id' => $request->get('product_id'),
+                'harga_awal' => $request->get('harga_awal'),
+                'harga_retail' => $request->get('harga_retail'),
+                'qty' => $request->get('qty'),
+                'tgl' => $request->get('tgl'),
+                'sub_total' => $request->get('sub_total'),
+                'isLunas' => $request->get('isLunas'),
+                'ket1'=> $request->get('ket1'),
+                'ket2'=> $request->get('ket2'),
+                'laba' => $keuntungan
+            ]);
+            $sell->save();
+
+            Session::flash("flash_notification", [
+                "level"=>"success",
+                "message"=>" $sell->tgl , berhasil ditambahkan."
+            ]);
+
+            return redirect()->route('sells.index');
+
+
+           // =====
+/*
         $sell = Sell::create($request->all());
 
         Session::flash("flash_notification", [
@@ -69,6 +99,7 @@ class SellsController extends Controller
         ]);
 
         return redirect()->route('sells.index');
+        */
     }
 
     /**
@@ -156,5 +187,12 @@ class SellsController extends Controller
         //$p = Product::where('category_id', $request->id)->first();
 
         return response()->json($p);
+    }
+
+    public function status(Request $request)
+    {
+        $q = $request->get('q');
+        $sells = Sell::where('isLunas', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20);
+        return view('sells.index', compact('sells', 'q'));
     }
 }

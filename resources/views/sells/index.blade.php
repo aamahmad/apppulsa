@@ -45,8 +45,7 @@
             <thead>
                 <tr>
                   <th>#</th>
-                  <th>ID Trx</th>
-                  <th>Tanggal</th>
+                  <th>Tgl. Order</th>
                   <th>Nama Barang</th>
                   <th>Kategori</th>
                   <th>Modal</th>
@@ -55,6 +54,7 @@
                   <th>Sub. Total</th>
                   <th>Margin</th>
                   <th>Status</th>
+                  <th>Keterangan</th>
                   <th>Pelanggan</th>
                   <th></th>
                 </tr>
@@ -65,7 +65,6 @@
               @if ($i > 1) @endif
                 <tr>
                   <td>{{ $i }}</td>
-                  <td>{{ $sell->id }}</td>
                   <td>{{ date('d M Y', strtotime($sell->tgl)) }}</td>
                   <td>{{ $sell->product->name or ''}}</td>
                   <td>{{ $sell->product->category->name or ''}}</td>
@@ -81,6 +80,7 @@
                       <a href="#"><span class="label label-danger" data-toggle="modal" data-target="#myModal{{ $sell->id }}">Belum Lunas</span></a>
                     @endif
                   </td>
+                  <td>{{ $sell->ket1}}</td> 
                   <td>{{ $sell->customer->name or ''}}</td> 
                   <td>
                   {!! Form::model($sell, ['route' => ['sells.destroy', $sell], 'method' => 'delete', 'class' => 'form-inline js-confirm', 'data-confirm'=> 'Yakin mau di hapus ..!!'] ) !!}
@@ -100,24 +100,36 @@
         <h4 class="modal-title" id="myModalLabel">Status Pembelian </h4>
       </div>
       <div class="modal-body">
-      
-        <b>Id Transaksi : </b>{{ $sell->id }}<br>
-        <b>Tgl. Transaksi : </b>{{ date('d M Y', strtotime($sell->tgl)) }}<br>
-        <b>Nama Pelanggan : </b>{{ $sell->customer->name or ''}}<br>
-        <b>Nama Produk : </b>{{ $sell->product->name or ''}}<br>
-        <b>Jenis Produk : </b>{{ $sell->product->jenis or ''}}<br>
-        <b>Harga Modal : </b>Rp {{ number_format($sell->harga_awal) }}<br>
-        <b>Harga Retail : </b>Rp {{ number_format($sell->harga_retail) }}<br>
-        <b>Qty : </b>{{ $sell->qty}}<br>
-        <b>Subtotal : </b>{{ $sell->product->name or ''}}<br>
-        <b>Keuntungan : </b>Rp {{ number_format($subtotal - ($sell->harga_awal *= $sell->qty)) }}  <br>
-        <b>Status : </b>
+        <h4><strong>Produk</strong></h4>
+        Id Transaksi : <b>{{ $sell->id }}</b><br>
+        Tgl. Transaksi : <b>{{ date('d M Y', strtotime($sell->tgl)) }}</b><br>
+        Tgl. Input Transaksi : <b>{{ date('d M Y H:i:s', strtotime($sell->created_at)) }}</b><br>        
+        Jenis Produk : <b>{{ $sell->product->jenis or ''}}</b><br>
+        Nama Produk : <b>{{ $sell->product->name or ''}}</b><br>
+        Harga Modal : <b>Rp {{ number_format($sell->harga_awal) }}</b><br>
+        Harga Retail : <b>Rp {{ number_format($sell->harga_retail) }}</b><br>
+        Qty : <b>{{ $sell->qty}}</b><br>
+        Subtotal : <b>Rp {{ number_format($sell->sub_total) }}</b><br>
+
+        <hr>
+        <h4><strong>Pelanggan</strong></h4>
+        Nama Pelanggan : <b>{{ $sell->customer->name or '-'}}</b><br>
+        Keterangan 1 : <b>{{ $sell->ket1}}</b><br>
+        Keterangan 2 : <b>{{ $sell->ket2}}</b><br>
+        Status : <b>
           @if ( $sell->isLunas != 0 )
             <a href="#"><span class="label label-success" data-toggle="modal" data-target="#myModal{{ $sell->id }}">Lunas</span></a>
           @else
             <a href="#"><span class="label label-danger" data-toggle="modal" data-target="#myModal{{ $sell->id }}">Belum Lunas</span></a>
           @endif
+          </b>
         <br>
+        Terakhir dirubah status : <b>{{ date('d M Y H:i:s', strtotime($sell->updated_at)) }}</b><br>
+        
+
+        
+        
+        
         
       </div>
  
