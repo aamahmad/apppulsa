@@ -23,7 +23,7 @@ class StocksController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-        $stocks = Stock::where('jumlah', 'LIKE', '%'.$q.'%')->paginate(20);
+        $stocks = Stock::where('jumlah', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20);
         return view('stocks.index', compact('stocks', 'q'));
     }
 

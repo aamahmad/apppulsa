@@ -88,6 +88,10 @@
 		              			<td><b>Harga Jual</b></td>
 		              			<td><b>Qty</b></td>
 		              			<td><b>Sub Total</b></td>
+		              			<td><b>Pembayaran</b></td>
+		              			<td><b>Terakhir diubah</b></td>
+		              			<td><b>Catatan 1</b></td>
+		              			<td><b>Catatan 2</b></td>
 		              		</tr>
 			        <?php $i = 1; ?>
 			            	@foreach($trxpelanggans as $trxpelanggan)
@@ -100,6 +104,16 @@
 			              			<td>Rp {{ number_format($trxpelanggan->harga_retail) }}</td>
 			              			<td>{{ $trxpelanggan->qty}}</td>
 			              			<td>Rp {{ number_format( $trxpelanggan->sub_total) }}</td>
+			              			<td>
+			              				@if ( App\Sell::where('isLunas', '!=', 0))
+					                      <a href="#"><span class="label label-success">Lunas</span></a>
+					                    @else
+					                      <a href="#"><span class="label label-danger">Belum Lunas</span></a>
+					                    @endif
+			              			</td>
+			              			<td>{{$trxpelanggan->updated_at }}</td>
+			              			<td>{{$trxpelanggan->ket1 }}</td>
+			              			<td>{{$trxpelanggan->ket2 }}</td>
 			              		</tr>
 		              		<?php $i++; ?>
               				@endforeach

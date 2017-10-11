@@ -9,7 +9,7 @@
 <div class="form-group">
   <label class="col-sm-2 control-label">Nama Pelanggan</label>
   <div class="col-sm-3">
-    {!! Form::select('customer_id', [''=>'']+App\Customer::pluck('name','id')->all(), null, ['class'=>'form-control']) !!}
+    {!! Form::select('customer_id', ['0'=>'--bukan pelanggan--']+App\Customer::pluck('name','id')->all(), null, ['class'=>'form-control']) !!}
     {!! $errors->first('customer_id', '<p class="help-block">:message</p>') !!}
   </div>
 </div>

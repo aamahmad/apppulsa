@@ -22,7 +22,7 @@ class DepositsController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-        $deposits = Deposit::where('jumlah', 'LIKE', '%'.$q.'%')->paginate(5);
+        $deposits = Deposit::where('jumlah', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(5);
         return view('deposits.index', compact('deposits', 'q'));
     }
 

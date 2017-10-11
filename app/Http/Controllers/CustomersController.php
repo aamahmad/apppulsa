@@ -26,7 +26,7 @@ class CustomersController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-        $customers = Customer::where('name', 'LIKE', '%'.$q.'%')->paginate(20);
+        $customers = Customer::where('name', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20);
         return view('customers.index', compact('customers', 'q'));
     }
 
@@ -74,7 +74,7 @@ class CustomersController extends Controller
         $customer = \App\Customer::findOrFail($id);
         //$datanomor = \App\Nomor::findOrFail($id);
         $datanomor = Nomor::where('customer_id', $customer->id)->get();
-        $trxpelanggans = Sell::where('customer_id', $customer->id)->get();
+        $trxpelanggans = Sell::where('customer_id', $customer->id)->orderBy('created_at', 'desc')->get();
 
         return view('customers.show', compact('customer','datanomor','trxpelanggans'));
     }

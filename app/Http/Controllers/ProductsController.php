@@ -22,7 +22,7 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-        $products = Product::where('name', 'LIKE', '%'.$q.'%')->paginate(20);
+        $products = Product::where('name', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20);
         return view('products.index', compact('products', 'q'));
     }
 

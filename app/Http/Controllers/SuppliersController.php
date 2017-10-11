@@ -22,7 +22,7 @@ class SuppliersController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-        $suppliers = Supplier::where('name', 'LIKE', '%'.$q.'%')->paginate(20);
+        $suppliers = Supplier::where('name', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20);
         return view('suppliers.index', compact('suppliers', 'q'));
     }
 

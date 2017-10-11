@@ -54,7 +54,7 @@
               	<tr>
 	                <td>{{ $i }}</td>
 	                <td><a href="{{ route('customers.show', $customer) }}">{{ $customer->name }}</a></td>
-                  <td>{{ $customer->alamat}}</td>
+                  <td>{{ $customer->alamat }}</td>
                   <td>
                      @foreach(App\Nomor::where('customer_id',$customer->id)->get() as $nomorcustomer)
                       <span class="label label-success"><b>{{ $nomorcustomer->nomor }} | {{ $nomorcustomer->keterangan }}</b></span>
