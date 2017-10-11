@@ -9,7 +9,7 @@
 <div class="form-group">
   <label class="col-sm-2 control-label">Nama Pelanggan</label>
   <div class="col-sm-3">
-    {!! Form::select('customer_id', ['0'=>'--bukan pelanggan--']+App\Customer::pluck('name','id')->all(), null, ['class'=>'form-control']) !!}
+    {!! Form::select('customer_id', ['0'=>'-- Cari Pelanggan --']+App\Customer::pluck('name','id')->all(), null, ['class'=>'form-control js-selectize']) !!}
     {!! $errors->first('customer_id', '<p class="help-block">:message</p>') !!}
   </div>
 </div>
@@ -17,7 +17,7 @@
 <div class="form-group">
   <label class="col-sm-2 control-label">Produk</label>
   <div class="col-sm-3">
-    <select style="width: 200px" class="form-control productcategory">
+    <select style="width: 200px" class="form-control productcategory js-selectize">
         <option value="0" disabled="true" selected="true" name="category_id">--Kategori Produk--</option>
         @foreach($prod as $cat)
             <option value="{{$cat->id}}">{{$cat->name}}</option>

@@ -19,6 +19,11 @@
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
 
+    <!-- Selectize-->
+    <link href="{{ asset('css/selectize.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/selectize.bootstrap3.css') }}" rel="stylesheet">
+
+
   </head>
 
   <body>
@@ -94,6 +99,7 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/selectize.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('script')
     

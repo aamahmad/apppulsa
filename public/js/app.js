@@ -8,5 +8,10 @@ $(document).ready(function () {
 			return c;
 	});
 
+	// add selectize to select element
+	$('.js-selectize').selectize({
+		sortField: 'text'
+	});
+
 	
 });
