@@ -22,7 +22,7 @@ class DownlinesController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-        $downlines = Downline::where('markup', 'LIKE', '%'.$q.'%')->paginate(5);
+        $downlines = Downline::where('markup', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(5);
         return view('downlines.index', compact('downlines', 'q'));
     
     }

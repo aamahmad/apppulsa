@@ -40,7 +40,6 @@
             <li><a href="{{ url('status?q=0') }}"><b>Belum Bayar</b> <span class="badge">
               {{ App\Sell::where('isLunas','!=',1)->count() }}
             </span></a></li>
-            {{ $tglsekarang = Carbon\Carbon::now()->format('Y-m-d')}}
             <li><a href="{{ url('laba') }}"><b>Laba Hari ini</b> <span class="badge">
               Rp {{ number_format(App\Sell::where('tgl',Carbon\Carbon::now()->format('Y-m-d') )->get()->sum('laba')) }}
             </span></a></li>
