@@ -25,11 +25,7 @@ class SellsController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-<<<<<<< HEAD
-        $sells = Sell::where('isLunas', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20);
-=======
-        $sells = Sell::where('customer_id', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20);
->>>>>>> 3e365b640e9382702f7c6bbed5a6dc2f74f4bda5
+
         return view('sells.index', compact('sells', 'q'));
     }
 
