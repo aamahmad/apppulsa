@@ -90,7 +90,8 @@
   {!! Form::label('isLunas', 'Status pembayaran', ['class'=>'col-md-2 control-label']) !!}
   <div class="col-md-4">
       <div class="checkbox">
-        <label><input name="isLunas" type="checkbox" value="1">Lunas</label>
+          <input type="radio" name="isLunas" value="1">Lunas<br>
+          <input type="radio" name="isLunas" value="0" checked>Belum Lunas<br>
       </div>
   </div>
 </div>

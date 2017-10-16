@@ -42,8 +42,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-left">
             <li><a href="{{ url('home') }}">Dashboard</a></li>
-            <li><a href="{{ url('status?q=1') }}"><b>Belum Bayar</b> <span class="badge">
-              {{ App\Sell::where('isLunas','=',NULL)->count() }}
+
             </span></a></li>
             <li><a href="{{ url('laba') }}"><b>Laba Hari ini</b> <span class="badge">
               Rp {{ number_format(App\Sell::where('tgl',Carbon\Carbon::now()->format('Y-m-d') )->get()->sum('laba')) }}
