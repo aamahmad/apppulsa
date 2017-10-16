@@ -21,7 +21,7 @@ class CreateSellsTable extends Migration
             $table->integer('harga_awal');
             $table->integer('harga_retail');
             $table->integer('sub_total');
-            $table->boolean('isLunas')->nullable();
+            $table->integer('isLunas');
             $table->string('ket1')->nullable();
             $table->string('ket2')->nullable();
             $table->date('tgl');

@@ -42,7 +42,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-left">
             <li><a href="{{ url('home') }}">Dashboard</a></li>
-            <li><a href="{{ url('status?q=0') }}"><b>Belum Bayar</b> <span class="badge">
+            <li><a href="{{ url('status?q=0 ') }}"><b>Belum Bayar</b> <span class="badge">
               {{ App\Sell::where('isLunas','!=',1)->count() }}
             </span></a></li>
             <li><a href="{{ url('laba') }}"><b>Laba Hari ini</b> <span class="badge">

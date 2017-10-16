@@ -30,12 +30,10 @@
       <div class="col-md-6">
 
         {!! Form::open(['url'=>'sells', 'method'=>'get', 'class'=>'']) !!}
-          <div class="input-group {!! $errors->has('q') ? 'has-error' : '' !!}">
-            {!! Form::text('q', isset($q) ? $q : null, ['class'=>'form-control', 'placeholder'=>'Pencarian...']) !!}
+            {!! Form::select('q', ['0'=>'']+App\Customer::pluck('name','id')->all(), null, ['class'=>'form-control js-selectize','placeholder'=>'Pencarian pelanggan']) !!}
                 <span class="input-group-btn">
                   {!! Form::submit('Cari', ['class'=>'btn btn-default']) !!}
                 </span>
-          </div>
         {!! Form::close() !!}
       </div>
 
