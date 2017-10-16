@@ -25,7 +25,7 @@ class SellsController extends Controller
     public function index(Request $request)
     {
         $q = $request->get('q');
-        $sells = Sell::where('harga_awal', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20);
+        $sells = Sell::where('isLunas', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20);
         return view('sells.index', compact('sells', 'q'));
     }
 
@@ -193,7 +193,7 @@ class SellsController extends Controller
     public function status(Request $request)
     {
         $q = $request->get('q');
-        $sells = Sell::where('isLunas', 'LIKE', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20);
+        $sells = Sell::where('isLunas','=',$q)->orderBy('created_at', 'desc')->paginate(20);
         return view('sells.index', compact('sells', 'q'));
     }
 
