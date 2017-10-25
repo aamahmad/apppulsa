@@ -101,7 +101,7 @@
         <h4><strong>Produk</strong></h4>
         Id Transaksi : <b>{{ $sell->id }}</b><br>
         Tgl. Transaksi : <b>{{ date('d M Y', strtotime($sell->tgl)) }}</b><br>
-        Tgl. Input Transaksi : <b>{{ date('d M Y H:i:s', strtotime($sell->created_at)) }}</b><br>        
+        Tgl. Input Transaksi : <b>{{ $sell->created_at }}</b><br>        
         Jenis Produk : <b>{{ $sell->product->jenis or ''}}</b><br>
         Nama Produk : <b>{{ $sell->product->name or ''}}</b><br>
         Harga Modal : <b>Rp {{ number_format($sell->harga_awal) }}</b><br>

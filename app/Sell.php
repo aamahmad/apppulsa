@@ -33,5 +33,11 @@ class Sell extends Model
         return $this->belongsTo('App\Category');
     }
 
+    public function getCreatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['created_at'])
+           ->diffForHumans();
+    }
+
     
 }
